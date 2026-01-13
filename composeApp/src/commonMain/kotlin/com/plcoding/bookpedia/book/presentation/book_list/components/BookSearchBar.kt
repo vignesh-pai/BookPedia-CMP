@@ -7,9 +7,9 @@ import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.text.selection.LocalTextSelectionColors
 import androidx.compose.foundation.text.selection.TextSelectionColors
-//import androidx.compose.material.icons.Icons
-//import androidx.compose.material.icons.filled.Search
-//import androidx.compose.material.icons.filled.Close
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Close
+import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -57,11 +57,11 @@ fun BookSearchBar(
                 )
             },
             leadingIcon = {
-//                Icon(
-//                    imageVector = Icons.Default.Search,
-//                    contentDescription = null,
-//                    tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f)
-//                )
+                Icon(
+                    imageVector = Icons.Default.Search,
+                    contentDescription = null,
+                    tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f)
+                )
             },
             singleLine = true,
             keyboardActions = KeyboardActions(
@@ -78,11 +78,11 @@ fun BookSearchBar(
                             onSearchQueryChange("")
                         }
                     ) {
-//                        Icon(
-//                            imageVector = Icons.Default.Close,
-//                            contentDescription = stringResource(Res.string.close_hint),
-//                            tint = MaterialTheme.colorScheme.onSurface,
-//                        )
+                        Icon(
+                            imageVector = Icons.Default.Close,
+                            contentDescription = stringResource(Res.string.close_hint),
+                            tint = MaterialTheme.colorScheme.onSurface,
+                        )
                     }
                 }
             },
