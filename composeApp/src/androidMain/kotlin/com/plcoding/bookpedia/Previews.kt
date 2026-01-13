@@ -8,6 +8,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
+import com.plcoding.bookpedia.book.domain.Book
+import com.plcoding.bookpedia.book.presentation.book_list.BookListScreen
+import com.plcoding.bookpedia.book.presentation.book_list.BookListScreenRoute
+import com.plcoding.bookpedia.book.presentation.book_list.BookListState
 import com.plcoding.bookpedia.book.presentation.book_list.components.BookSearchBar
 
 @Preview
@@ -25,4 +29,31 @@ private fun BookSearchBarPreview() {
             )
         }
     }
+}
+
+private val books = List(10) {
+    Book(
+        id = it.toString(),
+        imageUrl = "https://covers.openlibrary.org/b/id/8231856-L.jpg",
+        firstPublishYear = null,
+        title = "Book $it",
+        authors = listOf("Author One", "Author Two"),
+        description = null,
+        languages = emptyList(),
+        averageRating = 4.6789,
+        ratingsCount = 3,
+        numPages = 100,
+        numEditions = 100,
+    )
+}
+
+@Preview
+@Composable
+private fun BookListScreenPreview() {
+    BookListScreen(
+        state = BookListState(
+            searchResults = books,
+        ),
+        onAction = {}
+    )
 }
