@@ -54,7 +54,9 @@ fun BookListItem(
         color = LightBlue.copy(alpha = 0.2f)
     ) {
         Row(
-            modifier = Modifier.padding(16.dp).fillMaxWidth().height(IntrinsicSize.Min)
+            modifier = Modifier.padding(16.dp).fillMaxWidth().height(IntrinsicSize.Min),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(16.dp),
         ) {
             Box(
                 modifier = Modifier.height(100.dp),
