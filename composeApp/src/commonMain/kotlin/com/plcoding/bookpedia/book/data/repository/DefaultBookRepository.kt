@@ -1,7 +1,6 @@
 package com.plcoding.bookpedia.book.data.repository
 
 import com.plcoding.bookpedia.book.data.mappers.toBook
-import com.plcoding.bookpedia.book.data.network.KtorRemoteBookDataSource
 import com.plcoding.bookpedia.book.data.network.RemoteBookDataSource
 import com.plcoding.bookpedia.book.domain.Book
 import com.plcoding.bookpedia.book.domain.BookRepository
@@ -18,6 +17,12 @@ class DefaultBookRepository(
             query = query,
         ).map { dto ->
             dto.results.map { it.toBook() }
+        }
+    }
+
+    override suspend fun getBookDescription(bookWorkId: String): Result<String?, DataError> {
+        return remoteBookDataSource.getBookDetails(bookWorkId).map { dto ->
+            dto.description
         }
     }
 }

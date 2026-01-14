@@ -1,27 +1,63 @@
 package com.plcoding.bookpedia.book.presentation.book_detail
 
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import androidx.navigation.toRoute
+import com.plcoding.bookpedia.app.Route
+import com.plcoding.bookpedia.book.domain.BookRepository
+import com.plcoding.bookpedia.core.domain.onSuccess
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.onStart
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
 
-class BookDetailViewModel: ViewModel() {
+class BookDetailViewModel(
+    private val bookRepository: BookRepository,
+    private val savedStateHandle: SavedStateHandle,
+) : ViewModel() {
 
+    val bookId = savedStateHandle.toRoute<Route.BookDetails>().id
     private val _state = MutableStateFlow(BookDetailState())
-    val state = _state.asStateFlow()
+    val state = _state.onStart {
+        fetchBookDescription()
+    }.stateIn(
+        scope = viewModelScope,
+        started = SharingStarted.WhileSubscribed(5_000),
+        initialValue = _state.value
+    )
 
     fun onAction(action: BookDetailAction) {
         when (action) {
             is BookDetailAction.OnBackClick -> {
                 // Handle back click action
             }
+
             is BookDetailAction.OnFavoriteClick -> {
                 // Handle favorite click action
             }
+
             is BookDetailAction.OnSelectedBookChange -> {
                 _state.update {
                     it.copy(
                         book = action.book,
+                        errorMessage = null
+                    )
+                }
+            }
+        }
+    }
+
+    private fun fetchBookDescription() {
+        // Simulate fetching book details
+        viewModelScope.launch {
+            bookRepository.getBookDescription(bookId).onSuccess { description ->
+                _state.update {
+                    it.copy(
+                        isLoading = false,
+                        book = it.book?.copy(description = description),
                         errorMessage = null
                     )
                 }
