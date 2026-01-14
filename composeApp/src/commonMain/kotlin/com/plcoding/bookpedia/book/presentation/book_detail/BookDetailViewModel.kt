@@ -21,7 +21,6 @@ class BookDetailViewModel: ViewModel() {
             is BookDetailAction.OnSelectedBookChange -> {
                 _state.update {
                     it.copy(
-                        isLoading = false,
                         book = action.book,
                         errorMessage = null
                     )
