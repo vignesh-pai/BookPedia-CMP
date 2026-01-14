@@ -161,7 +161,7 @@ fun BlurredImageBackground(
                                         } else {
                                             stringResource(Res.string.mark_as_favorite)
                                         },
-                                        tint = Color.Red,
+                                        tint = if (isFavourite) Color.Red else Color.White,
                                     )
                                 }
                             }
